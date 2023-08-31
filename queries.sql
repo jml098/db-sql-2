@@ -105,11 +105,9 @@ ORDER BY teachers.id
 
 
 -- 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per superare ciascuno dei suoi esami
-SELECT
-es.student_id,
-e.id AS exam_id,
-COUNT(es.exam_id) AS num_attempts
-FROM exam_student es
-JOIN exams e ON es.exam_id = e.id
-GROUP BY es.student_id, e.id
-ORDER BY num_attempts
+SELECT student_id , course_id, COUNT(course_id) AS attempts
+FROM exam_student es 
+JOIN exams e ON e.id = es.exam_id 
+JOIN courses c ON c.id = e.course_id 
+GROUP BY student_id , course_id
+ORDER BY student_id 
